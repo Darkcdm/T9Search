@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main(int argc, char **argv) {
-    //Reassign looked for strings
+    //Reassign input arguments into local values
     // Check if inputs are valid
     // translate the input string
     //assign the list into a nested string
