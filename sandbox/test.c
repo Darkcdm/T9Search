@@ -1,13 +1,16 @@
 #include <stdio.h>
 
-int main () {
-   char str[60];
-   FILE *fp;
+int main(int argc, char **argv)
+{
+    int i = 0;
+    for (i = 0; i < argc; i++)
+    {
+        printf("argv[%d] = %s\n", i, argv[i]);
+    }
+    printf("%d\n",argc);
 
-   if( fgets (str, 60, fp)!=NULL ) {
-      /* writing content to stdout */
-      puts(str);
-   }
-   
-   return(0);
+    char buffer[256];
+    while(fgets(buffer, 256, stdin)) puts(buffer);
+
+    return 0;
 }
