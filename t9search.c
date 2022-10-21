@@ -11,7 +11,7 @@ int getLetters (char letters[][4],char keys[], int keysLen){
                 letters[i][0] = 'A';
                 letters[i][1] = 'B';
                 letters[i][2] = 'C';
-                letters[i][3] = "\0";
+                letters[i][3] = '\0';
 
                 combosLen = combosLen + 3;
             break;
@@ -101,9 +101,10 @@ int main(int argc, char **argv){
     } 
     if (argc == 2) printf("One argument is specified\n");
     
-    char keys[] = argv[1];
-    int keysLen = strlen(keys);
-
+    int keysLen = strlen(argv[1]);
+    char keys[keysLen];
+    strcpy (keys, argv[1]);
+    
     char letters [keysLen][5];
 
     int combosLen = getLetters(letters, keys, keysLen);

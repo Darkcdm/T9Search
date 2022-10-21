@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/darks/Desktop/Cprograming/T9Search",
-      "program": "c:/Users/darks/Desktop/Cprograming/T9Search/build/Debug/outDebug",
+      "cwd": "c:/Users/Dark/Desktop/Programing GitHub Repos/T9Search",
+      "program": "c:/Users/Dark/Desktop/Programing GitHub Repos/T9Search/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
