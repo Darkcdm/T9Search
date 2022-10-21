@@ -1,81 +1,82 @@
 #include <stdio.h>
 #include <string.h>
 
-int getLatters (char latters[][],char keys[], ){
-    for (int i=0;i < strlen(keys); i++){
-        int combosLen = 0;
+int getLetters (char letters[][4],char keys[], int keysLen){
+    int combosLen = 0;
+    for (int i=0;i < keysLen; i++){
+        
         switch (keys[i]){
         
             case 50: //2
-                latters[i][0] = 'A';
-                latters[i][1] = 'B';
-                latters[i][2] = 'C';
-                latters[i][3] = "\0";
+                letters[i][0] = 'A';
+                letters[i][1] = 'B';
+                letters[i][2] = 'C';
+                letters[i][3] = "\0";
 
                 combosLen = combosLen + 3;
             break;
             
             case 51: //3
-                latters[i][0] = 'D';
-                latters[i][1] = 'E';
-                latters[i][2] = 'F';
-                latters[i][3] = '\0';
+                letters[i][0] = 'D';
+                letters[i][1] = 'E';
+                letters[i][2] = 'F';
+                letters[i][3] = '\0';
 
                 combosLen = combosLen + 3;
             break;
             
             case 52: //4
-                latters[i][0] = 'G';
-                latters[i][1] = 'H';
-                latters[i][2] = 'I';
-                latters[i][3] = '\0';
+                letters[i][0] = 'G';
+                letters[i][1] = 'H';
+                letters[i][2] = 'I';
+                letters[i][3] = '\0';
 
                 combosLen = combosLen + 3;
             break;
 
             case 53: //5
-                latters[i][0] = 'J';
-                latters[i][1] = 'K';
-                latters[i][2] = 'L';
-                latters[i][3] = '\0';
+                letters[i][0] = 'J';
+                letters[i][1] = 'K';
+                letters[i][2] = 'L';
+                letters[i][3] = '\0';
                 
                 combosLen = combosLen + 3;
             break;
             
             case 54: //6
-                latters[i][0] = 'M';
-                latters[i][1] = 'N';
-                latters[i][2] = 'O';
-                latters[i][3] = '\0';
+                letters[i][0] = 'M';
+                letters[i][1] = 'N';
+                letters[i][2] = 'O';
+                letters[i][3] = '\0';
                 
                 combosLen = combosLen + 3;
             break;
 
             case 55: //7
-                latters[i][0] = 'P';
-                latters[i][1] = 'Q';
-                latters[i][2] = 'R';
-                latters[i][3] = 'S';
-                latters[i][4] = '\0';
+                letters[i][0] = 'P';
+                letters[i][1] = 'Q';
+                letters[i][2] = 'R';
+                letters[i][3] = 'S';
+                letters[i][4] = '\0';
 
                 combosLen = combosLen + 4;
             break;
             
             case 56: //8
-                latters[i][0] = 'T';
-                latters[i][1] = 'U';
-                latters[i][2] = 'V';
-                latters[i][3] = '\0';
+                letters[i][0] = 'T';
+                letters[i][1] = 'U';
+                letters[i][2] = 'V';
+                letters[i][3] = '\0';
                 
                 combosLen = combosLen + 3;
             break;
 
             case 57: //
-                latters[i][0] = 'W';
-                latters[i][1] = 'X';
-                latters[i][2] = 'Y';
-                latters[i][3] = 'Z';
-                latters[i][4] = '\0';
+                letters[i][0] = 'W';
+                letters[i][1] = 'X';
+                letters[i][2] = 'Y';
+                letters[i][3] = 'Z';
+                letters[i][4] = '\0';
 
                 combosLen = combosLen + 4;
             break;
@@ -86,6 +87,7 @@ int getLatters (char latters[][],char keys[], ){
             break;
         }
     }
+    return combosLen;
 }
 
 int main(int argc, char **argv){
@@ -99,15 +101,14 @@ int main(int argc, char **argv){
     } 
     if (argc == 2) printf("One argument is specified\n");
     
-    char currentKey;
     char keys[] = argv[1];
-    int keyLen = strlen(keys);
+    int keysLen = strlen(keys);
 
-    char latters [keyLen][5];
+    char letters [keysLen][5];
 
-    int combosLen = getLatters(latters[][], keys[]);
-    char combos [combosLen][keyLen];
-    createCombos(latters, combos);
+    int combosLen = getLetters(letters, keys, keysLen);
+    char combos [combosLen][keysLen];
+    createCombos(letters, combos);
 
 
     for (int i = 0; i < combosLen; i++){
