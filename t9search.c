@@ -1,7 +1,59 @@
 #include <stdio.h>
 #include <string.h>
 
-int getLetters (char letters[][4],char keys[], int keysLen){
+int createCombos(int maxDepth,char letters[][5], char combos[][maxDepth]){
+    //set up of all variables
+  
+    int depth = 0;
+    int selector [maxDepth];
+    int combosLen = 0;
+
+    //seting up the selector
+    for (int i = 0; i < maxDepth; i++){
+        selector[i] = 0;
+    }
+
+
+    //will continue the loop until the selected character in the first row is '\0'
+    while (letters[0][selector[0]] != '\0'){
+
+        //Load the first combination into combos array (the fist combination is all zeros)
+        //simplify the char selection to one variable
+        char selectedChar = letters[depth][selector[depth]];
+
+
+        //Check that I haven't selected the end of the line char
+        if (letters[depth][selector[depth]+1] == '\0'){
+            //if I did selected the end of the line, then go back to start and up the selector above
+            selector[depth] = 0;
+            selector[depth - 1]++;
+        }else{
+            //else, enter the selectedChar into combos Array and print it out for debuging
+            combos[combosLen][depth] = selectedChar;
+            printf("%c", selectedChar);
+        }
+
+
+    
+
+
+        //if the depth is maxed, then go back to zero and start another combo
+        if (depth == maxDepth-1){
+            depth = 0;
+            combosLen++;
+
+            //move the lower selector by one
+            selector[maxDepth-1]++;
+
+            printf("\n");
+        }else{
+            depth++;
+        }
+    }
+    return 0;
+}
+
+int getLetters (char letters[][5],char keys[], int keysLen){
     int combosLen = 0;
     for (int i=0;i < keysLen; i++){
         
@@ -109,7 +161,7 @@ int main(int argc, char **argv){
 
     int combosLen = getLetters(letters, keys, keysLen);
     char combos [combosLen][keysLen];
-    createCombos(letters, combos);
+    createCombos(keysLen,letters, combos);
 
 
     for (int i = 0; i < combosLen; i++){
