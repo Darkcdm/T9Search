@@ -21,12 +21,20 @@ int createCombos(int maxDepth,char letters[][5], char combos[][maxDepth]){
         //simplify the char selection to one variable
         char selectedChar = letters[depth][selector[depth]];
 
+        int resetCheck = 0;
+
+        for (int i = 0; i < maxDepth; i++){
+            if (letters[i][selector[i]] == '\0'){
+                resetCheck = i;
+            }
+        }
+
 
         //Check that I haven't selected the end of the line char
-        if (letters[depth][selector[depth]+1] == '\0'){
+        if (selectedChar == '\0' || resetCheck != 0){
             //if I did selected the end of the line, then go back to start and up the selector above
-            selector[depth] = 0;
-            selector[depth - 1]++;
+            selector[resetCheck] = 0;
+            selector[resetCheck - 1]++;
         }else{
             //else, enter the selectedChar into combos Array and print it out for debuging
             combos[combosLen][depth] = selectedChar;
@@ -36,18 +44,21 @@ int createCombos(int maxDepth,char letters[][5], char combos[][maxDepth]){
 
     
 
-
-        //if the depth is maxed, then go back to zero and start another combo
-        if (depth == maxDepth-1){
+        if (resetCheck != 0){
             depth = 0;
-            combosLen++;
-
-            //move the lower selector by one
-            selector[maxDepth-1]++;
-
-            printf("\n");
         }else{
-            depth++;
+            //if the depth is maxed, then go back to zero and start another combo
+            if (depth == maxDepth-1){
+                depth = 0;
+                combosLen++;
+
+                //move the lower selector by one
+                selector[maxDepth-1]++;
+
+                printf("\n");
+            }else{
+                depth++;
+            }
         }
     }
     return 0;
@@ -160,11 +171,13 @@ int main(int argc, char **argv){
     char letters [keysLen][5];
 
     int combosLen = getLetters(letters, keys, keysLen);
+    if (combosLen < 0) return 1;
     char combos [combosLen][keysLen];
     createCombos(keysLen,letters, combos);
 
-
+    /*
     for (int i = 0; i < combosLen; i++){
         printf("%s", combos[i]);
     }
+    */
 } 
