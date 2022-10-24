@@ -38,7 +38,7 @@ int createCombos(int maxDepth,char letters[][5], char combos[][maxDepth]){
         }else{
             //else, enter the selectedChar into combos Array and print it out for debuging
             combos[combosLen][depth] = selectedChar;
-            printf("%c", selectedChar);
+            //printf("%c", selectedChar);
         }
 
 
@@ -55,17 +55,18 @@ int createCombos(int maxDepth,char letters[][5], char combos[][maxDepth]){
                 //move the lower selector by one
                 selector[maxDepth-1]++;
 
-                printf("\n");
+                //printf("\n");
             }else{
                 depth++;
             }
         }
     }
+    printf("%d\n", combosLen);
     return 0;
 }
 
 int getLetters (char letters[][5],char keys[], int keysLen){
-    int combosLen = 0;
+    int combosLen = 1;
     for (int i=0;i < keysLen; i++){
         
         switch (keys[i]){
@@ -76,7 +77,7 @@ int getLetters (char letters[][5],char keys[], int keysLen){
                 letters[i][2] = 'C';
                 letters[i][3] = '\0';
 
-                combosLen = combosLen + 3;
+                combosLen = combosLen * 3;
             break;
             
             case 51: //3
@@ -85,7 +86,7 @@ int getLetters (char letters[][5],char keys[], int keysLen){
                 letters[i][2] = 'F';
                 letters[i][3] = '\0';
 
-                combosLen = combosLen + 3;
+                combosLen = combosLen * 3;
             break;
             
             case 52: //4
@@ -94,7 +95,7 @@ int getLetters (char letters[][5],char keys[], int keysLen){
                 letters[i][2] = 'I';
                 letters[i][3] = '\0';
 
-                combosLen = combosLen + 3;
+                combosLen = combosLen * 3;
             break;
 
             case 53: //5
@@ -103,7 +104,7 @@ int getLetters (char letters[][5],char keys[], int keysLen){
                 letters[i][2] = 'L';
                 letters[i][3] = '\0';
                 
-                combosLen = combosLen + 3;
+                combosLen = combosLen * 3;
             break;
             
             case 54: //6
@@ -112,7 +113,7 @@ int getLetters (char letters[][5],char keys[], int keysLen){
                 letters[i][2] = 'O';
                 letters[i][3] = '\0';
                 
-                combosLen = combosLen + 3;
+                combosLen = combosLen * 3;
             break;
 
             case 55: //7
@@ -122,7 +123,7 @@ int getLetters (char letters[][5],char keys[], int keysLen){
                 letters[i][3] = 'S';
                 letters[i][4] = '\0';
 
-                combosLen = combosLen + 4;
+                combosLen = combosLen * 4;
             break;
             
             case 56: //8
@@ -131,7 +132,7 @@ int getLetters (char letters[][5],char keys[], int keysLen){
                 letters[i][2] = 'V';
                 letters[i][3] = '\0';
                 
-                combosLen = combosLen + 3;
+                combosLen = combosLen * 3;
             break;
 
             case 57: //
@@ -141,7 +142,7 @@ int getLetters (char letters[][5],char keys[], int keysLen){
                 letters[i][3] = 'Z';
                 letters[i][4] = '\0';
 
-                combosLen = combosLen + 4;
+                combosLen = combosLen * 4;
             break;
             
             default:
@@ -150,6 +151,7 @@ int getLetters (char letters[][5],char keys[], int keysLen){
             break;
         }
     }
+    printf("%d\n", combosLen);
     return combosLen;
 }
 
