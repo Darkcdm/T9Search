@@ -38,7 +38,6 @@ int createCombos(int maxDepth,char letters[][5], char combos[][maxDepth]){
         }else{
             //else, enter the selectedChar into combos Array and print it out for debuging
             combos[combosLen][depth] = selectedChar;
-            //printf("%c", selectedChar);
         }
 
 
@@ -54,14 +53,11 @@ int createCombos(int maxDepth,char letters[][5], char combos[][maxDepth]){
 
                 //move the lower selector by one
                 selector[maxDepth-1]++;
-
-                //printf("\n");
             }else{
                 depth++;
             }
         }
     }
-    printf("%d\n", combosLen);
     return 0;
 }
 
@@ -70,6 +66,15 @@ int getLetters (char letters[][5],char keys[], int keysLen){
     for (int i=0;i < keysLen; i++){
         
         switch (keys[i]){
+            case 48: //0
+                //Zero has no assigned letter but must be counted as a valid argument
+                return 1;
+            break;
+            
+            case 49: //1
+                //One has no assigned letter but must be counted as a valid argument
+                return 1;
+            break;
         
             case 50: //2
                 letters[i][0] = 'A';
@@ -135,7 +140,7 @@ int getLetters (char letters[][5],char keys[], int keysLen){
                 combosLen = combosLen * 3;
             break;
 
-            case 57: //
+            case 57: //9
                 letters[i][0] = 'W';
                 letters[i][1] = 'X';
                 letters[i][2] = 'Y';
@@ -151,8 +156,71 @@ int getLetters (char letters[][5],char keys[], int keysLen){
             break;
         }
     }
-    printf("%d\n", combosLen);
     return combosLen;
+}
+
+int sortContacts (int comboLen, int keyLen, char combos [comboLen][keyLen]){
+    
+    char line1[100];
+    char line2[100];
+    
+    /*
+    while (fgets(line1, 100, stdin) && fgets(line2, 100, stdin)){
+            printf("%s\n", line1);
+            printf("%s\n", line2);
+    }
+    */
+    
+    while (fgets(line1, 100, stdin) && fgets(line2, 100, stdin)){
+        
+        char buffer [keyLen];
+        char sifter [keyLen];
+        char selectedLine [100];
+        
+        
+        for (int linePicker = 0; linePicker < 2; linePicker++){
+            if (linePicker == 0){
+                strcpy(selectedLine, line1);
+            }else{
+                strcpy(selectedLine, line2);            }
+            for (int comboIndex = 0; comboIndex < comboLen; comboIndex++){
+                
+                int cursor = 0;
+                int comboFound = 1;
+                while (selectedLine[cursor+keyLen-1] != '\0'){
+                    for (int i = 0; i < keyLen; i++){
+                        buffer[i] = selectedLine[i+cursor];
+                        sifter[i] = combos[comboIndex][i];
+                    }
+                    
+                    int check = 0;
+                    for (int i = 0; i < keyLen; i++){
+                        
+                        if (sifter[i] == buffer[i]){
+                            check++;
+                        }
+                    }
+                    if (check == keyLen){
+                        printf("%s\n", line1);
+                        printf("%s\n", line2);
+                        printf("Matching Chars: %s\n", sifter);
+                        comboFound = 0;
+                        break;
+                    }else{
+                        //printf("%s  NOT FOUND\n",sifter);
+                    }
+
+                    cursor++;
+                }
+                if (comboFound == 0){
+                    break;
+                }
+            }
+        }
+    }
+    
+
+    return 0;
 }
 
 int main(int argc, char **argv){
@@ -165,21 +233,27 @@ int main(int argc, char **argv){
         return 1;
     } 
     if (argc == 2) printf("One argument is specified\n");
-    
+
     int keysLen = strlen(argv[1]);
     char keys[keysLen];
     strcpy (keys, argv[1]);
-    
+
     char letters [keysLen][5];
 
     int combosLen = getLetters(letters, keys, keysLen);
-    if (combosLen < 0) return 1;
-    char combos [combosLen][keysLen];
-    createCombos(keysLen,letters, combos);
 
-    /*
-    for (int i = 0; i < combosLen; i++){
-        printf("%s", combos[i]);
+    if (combosLen < 0) printf("ERROR, ComboLen too small!\n");
+
+    char combos [combosLen][keysLen];
+
+    if (combosLen != 1){
+        combosLen++;        
+        createCombos(keysLen,letters, combos);
     }
-    */
+    for (int i = 0; i < keysLen; i++){
+        combos [combosLen-1][i] = keys[i];
+    }
+    
+    sortContacts(combosLen, keysLen, combos);
+    return 0;        
 } 
