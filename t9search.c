@@ -189,7 +189,11 @@ int sortContacts (int comboLen, int keyLen, char combos [comboLen][keyLen]){
                 int comboFound = 1;
                 while (selectedLine[cursor+keyLen-1] != '\0'){
                     for (int i = 0; i < keyLen; i++){
-                        buffer[i] = selectedLine[i+cursor];
+                        char pickedChar = selectedLine[i+cursor];
+                        if (pickedChar >= 97 && pickedChar <= 122){
+                            pickedChar = pickedChar - 32;
+                        }
+                        buffer[i] = pickedChar;
                         sifter[i] = combos[comboIndex][i];
                     }
                     
