@@ -227,9 +227,18 @@ int sortContacts (int comboLen, int keyLen, char combos [comboLen][keyLen]){
     return 0;
 }
 
+int printAllContacts(){
+    char line1[100];
+     while (fgets(line1, 100, stdin)){
+        printf("%s\n", line1);
+     }
+    return 0;
+}
+
 int main(int argc, char **argv){
     if (argc < 2){
         printf("No arguments specified\n");
+        printAllContacts();
         return 1;
     } 
     if (argc > 2){
